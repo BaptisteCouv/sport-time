@@ -1,6 +1,5 @@
 <template>
     <div class="add-exercice">
-        {{ $route.params.codeExo }}
         <div class="list">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="exerciceName" placeholder="Nom de l'exercice">
@@ -104,7 +103,7 @@
     .add-exercice .list {
         background-color: #F5F5F5;
         /* height: 100%; */
-        border-radius: 5px;
+        border-radius: 7px;
         padding: 5px; 
     }
 

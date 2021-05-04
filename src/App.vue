@@ -19,11 +19,11 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  #app {
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
+    color: #2c3e50;
+    background-color: #f5f8fa;
+    height: 100vh;
+  }
 </style>

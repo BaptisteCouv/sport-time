@@ -33,7 +33,7 @@ const router = new VueRouter({
       }]
     },
     {
-      path:'/exercie',
+      path:'/exercie/:codeExo',
       component: require('./components/Exercice.vue').default,
       name: 'exercice'
     },

@@ -2,15 +2,19 @@
     <div class="body-list">
         <div class="btn-list-exercice" @click="addExercice()">
             <!-- <router-link :to="{name: 'addExo'}" class="btn-add-exercice">AJOUTER UN EXERCICE</router-link> -->
-            AJOUTER UN ENTRAINEMENT
+            Entrainement 
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-grid-add" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="4" width="6" height="6" rx="1" /><rect x="14" y="4" width="6" height="6" rx="1" /><rect x="4" y="14" width="6" height="6" rx="1" /><path d="M14 17h6m-3 -3v6" /></svg>
         </div>
         <div class="list">
+            <div class="text-info">
+                Liste des entrainements ...
+            </div>
             <div v-for="exercice in exercices" :key="exercice.id">
                 <div class="btn-select-exercice">
                     <div class="btn-params" @click="openParams(exercice.codeExo)">
                         <font-awesome-icon icon="align-justify" />
                     </div>
-                    <div class="title" @click="selectExercice()">
+                    <div class="title" @click="selectExercice(exercice.codeExo)">
                         <div class="txt">
                             {{ exercice.titre }}    
                         </div>
@@ -28,12 +32,14 @@
 export default {
     data() {
         return {
-            exercices: []
+            exercices: [],
+            listEmpty: 'a'
         }
     },
     methods: {
-        selectExercice(codeExo) {
-            this.$router.push({ name: 'exercice', params: { codeExo: codeExo } })
+        selectExercice(codeExos) {
+            console.log('code exo : ', codeExos)
+            this.$router.push({ name: 'exercice', params: { codeExo: codeExos } })
         },
         addExercice() {
             this.$router.push({ name: 'addExo'});
@@ -44,23 +50,25 @@ export default {
     },
     mounted () {
         this.$http.get('http://localhost:3000/listExercice').then(response => {
-        // success callback
-        this.exercices = response.body;
+            // success callback
+            this.exercices = response.body;
         }, response => {
-        // error callback
-        console.log('erreur', response)
+            // error callback
+            console.log('erreur', response)
         });
+        console.log(this.listEmpty)
     },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .list-exercice{
+    .icon-tabler.icon-tabler-layout-grid-add {
+        float: right
     }
 
     .btn-list-exercice {
-        background: linear-gradient(267.23deg, #00A3FF -42.94%, rgba(255, 255, 255, 0) 88.57%), #6FCF97;
+        background: #0095e8;
         border-radius: 6px;
         padding: 15px;
         font-style: normal;
@@ -70,6 +78,11 @@ export default {
         color: #FFFFFF;
         margin-bottom: 15px;
     }
+
+    .title .txt {
+        font-weight: 500;
+        font-size: 19px;
+    } 
 
     .btn-add-exercice {
         text-decoration: none;
@@ -82,21 +95,21 @@ export default {
     }
 
     .body-list .list {
-        background-color: #F5F5F5;
-        height: 100%;
-        border-radius: 5px;
+        background-color: white;
+        border-radius: 7px;
         padding: 5px; 
     }
 
     .btn-select-exercice {
-        background-color: #6FCF97;
+        color: #009ef7;
+        border-color: #ecf8ff;
+        background-color: #ecf8ff;
         border-radius: 6px;
         padding: 10px;
         margin: 8px;
         font-style: normal;
         font-weight: normal;
         font-size: 18px;
-        color: #FFFFFF;
     }
 
     .btn-select-exercice .title {
@@ -108,8 +121,6 @@ export default {
     .btn-params {
         position: absolute;
         z-index: 100;
-    }
-
-    .btn-edit {
+        margin-top: 2px;
     }
 </style>

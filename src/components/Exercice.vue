@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="col-xl-3 col-sm-6 col-12">
+      <div class="col-xl-3 col-sm-6 col-12">
         <div class="card" @click="startTime()">
           <div class="card-content">
             <div class="card-body">
@@ -58,5 +58,15 @@
 
     .bg-green {
         background-color: #6FCF97;
+    }
+
+    .btn-back {
+        padding: 15px 15px 15px 1px;  
+        text-align: initial;
+    }
+
+    .btn-back .txt-back {
+        text-decoration: none;
+        color: grey;
     }
 </style>

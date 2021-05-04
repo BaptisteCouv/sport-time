@@ -1,48 +1,35 @@
 <template>
     <div class="add-exercice">
-        <div class="btn-back">
-            <router-link :to="{name: 'listExo'}" class="txt-back"><font-awesome-icon icon="chevron-left" /> Retour </router-link>
-        </div>
-        <div class="list">
+        <div class="list" v-if="createEntrainement">
+            <div class="text-home">
+                Creer vos entrainements sans limite
+            </div>
             <img src="../assets/Humaaans - 2 Characters.png" class="img-zone-preparation" alt="">
-            <div class="form-floating mb-3">
+            <div class="form-floating mb-3" v-if="createEntrainement">
                 <input type="text" @keyup="setTitle()" class="form-control" id="nameExo" placeholder="Nom de l'entrainement">
                 <label for="nameExo">Nom de l'entrainement</label>
             </div>
-            <!-- <div class="time-zone">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="repetition" placeholder="Repetition">
-                    <label for="repetition">Repetition</label>
-                </div>
-                <div class="ou"> OU</div>
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="timer" placeholder="Temps">
-                    <label for="timer">Temps</label>
-                </div>
-            </div> 
-             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                <div class="invalid-feedback">Example invalid custom file feedback</div>
-            </div> 
-            <img src="../assets/Humaaans - Sitting.png" class="img-zone" alt="">
-             <div class="recup">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="tempsRecup" placeholder="Temps de recuperation">
-                    <label for="tempsRecup">Temps de recuperation</label>
-                </div>
-            </div>     -->
-            <div class="zone-champ-exo">
-                <router-view></router-view>
-            </div>
-            <div class="btn-gestion">
+            <div class="btn-gestion" >
                 <div class="btn-list-exercice" @click="addExercice(); closeAddExercice()">
-                    <font-awesome-icon icon="chevron-left" />Terminer
+                    Terminer
+                    <div class="space"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 12l5 5l10 -10" />
+                    </svg>
                 </div>
                 <div class="btn-list-exercice" @click="addExercice(); completExercice()">
-                    Continuer<font-awesome-icon icon="chevron-right" />
+                    Commencer
+                    <div class="space"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <polyline points="9 6 15 12 9 18" />
+                    </svg>
                 </div>
             </div>
+        </div>
+        <div class="zone-champ-exo">
+            <router-view></router-view>
         </div>
     </div>
 </template>
@@ -51,6 +38,7 @@
     export default {
         data() {
             return {
+                createEntrainement: true,
                 title: '',
                 codeExo: '',
             }
@@ -84,7 +72,8 @@
             },
             completExercice() {
                 if(this.title != '') {
-                    this.$router.push({ name: 'addExo.pageExo', params: { codeExo: this.codeExo }})
+                    this.createEntrainement = false;
+                    this.$router.push({ name: 'addExo.pageExo', params: { codeExo: this.codeExo }});
                 } else {
                     var champExercice = document.querySelector("#nameExo")
                     champExercice.classList.add("is-invalid");
@@ -118,6 +107,16 @@
         margin-top: 15px;
     }
 
+    .text-home {
+        margin-bottom: 70px;
+        font-size: 30px;
+        font-weight: 900;
+        text-align: center;
+        margin-top: 70px;
+        text-transform: uppercase;
+        color: #3699ff
+    }
+
     .img-zone {
         height: auto;
         width: 40%;
@@ -126,15 +125,20 @@
 
     .img-zone-preparation {
         height: auto;
-        width: 80%;
         padding: 20px;
+        position: absolute;
+        float: left;
+        left: 0px;
+        top: 130px;
+        width: 100%;
+        opacity: 0.2;
     }
 
     .add-exercice .list {
-        background-color: #F5F5F5;
+        background-color: white;
         height: 100%;
         border-radius: 5px;
-        padding: 5px; 
+        padding: 10px; 
     }
 
     .time-zone {
@@ -147,18 +151,18 @@
     }
 
     .btn-list-exercice {
-        background: linear-gradient(267.23deg, #00A3FF -42.94%, rgba(255, 255, 255, 0) 88.57%), #6FCF97;
-        border-radius: 6px;
-        padding: 15px;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 24px;
-        color: #FFFFFF;
-        width: 45%;
+        color: #7e8299;
+        border-color: #f5f8fa;
+        background-color: #f5f8fa;
+        font-size: 16px;
+        border-radius: .475rem;
+        width: 130px;
+        height: 40px;
+        font-weight: 800!important;
         display: flex;
-        justify-content: inherit;
         align-items: center;
+        align-content: center;
+        justify-content: center;
     }
 
     .btn-add-exercice {
@@ -179,6 +183,11 @@
     .btn-gestion {
         /* margin-top: calc(100vh - 529px); */
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        margin-top: 40px;
+    }
+
+    .space{
+        width: 5px;
     }
 </style>
