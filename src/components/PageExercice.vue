@@ -15,7 +15,7 @@
                     <input type="text" class="form-control" id="timer" placeholder="Temps">
                     <label for="timer">Temps</label>
                 </div>
-            </div> 
+            </div>
             <!-- <div class="custom-file">
                 <input type="file" class="custom-file-input" id="validatedCustomFile" required>
                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
